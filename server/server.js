@@ -1,6 +1,6 @@
 const express = require('express');
 const PORT = process.env.PORT || 8903;
-
+const { createReadme } = require('./create/createReadme');
 const app = express();
 
 app.use(express.json());
@@ -11,7 +11,7 @@ app.use('/api', (req, res) => { res.send('Hello World!')});
 app.post('/generate-readme', async(req, res) => {
     userData = await req.body;
 
-    const readmeContent = generatemarkdown(userData);
+    const readmeContent = createReadme(userData);
     res.set({
         'Content-Type': 'attachment; filename=README.md',
         'Content-Disposition': 'attachment; filename=README.md',
